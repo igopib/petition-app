@@ -16,14 +16,16 @@ contract PetitionContract {
     }
 
     struct signer {
-        address signerAddress;
+        bool signed;
     }
 
     // Petition details are saved in a dynamic array.
-    Petition[] public petitons;
+    Petition[] public petitions;
 
     // Mapping to track number of signers per Petition
     mapping(uint256 => Petition) public idToPetition;
+
+    mapping(address => signer) signers;
 
     /*
      * Function takes name and description as parameters and assigns it a petitionID.
@@ -33,11 +35,22 @@ contract PetitionContract {
         string memory _petitionDescription
     ) public {
         petitionId++;
-        petitons.push(
+        petitions.push(
             Petition(_petitionName, _petitionDescription, 0, petitionId)
         );
         idToPetition[petitionId];
     }
 
-    function voteForPetition(uint256 idToPetition) public {}
+    /*
+     * Function takes a uint as parameter and adds vote count to the attached petition.
+     */
+
+    function voteForPetition(uint256 _id) public {
+        require(_id <= petitions.length, "Petition doesn't exist");
+        petitions[_id].signerCount++;
+    }
+
+    function getPetition() external view returns (Petition[] memory) {
+        return petitions;
+    }
 }
