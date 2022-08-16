@@ -51,8 +51,9 @@ contract PetitionContract {
      */
 
     function voteForPetition(uint256 _id) public {
-        require(_id <= petitions.length, "Petition doesn't exist");
-        petitions[_id].signerCount++;
+        // require(_id <= petitions.length, "Petition doesn't exist");
+        uint256 _petitionId = petitions[_id].id - 2;
+        petitions[_petitionId].signerCount++;
     }
 
     function getPetition() external view returns (Petition[] memory) {

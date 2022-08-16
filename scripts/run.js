@@ -16,7 +16,12 @@ async function main() {
     "Please contribute if you want dogs as our national animal"
   );
 
-  const signPetiton = await Petition.voteForPetition("0");
+  const addPetition2 = await Petition.createPetition(
+    "Petiton to make cats national animal",
+    "Please contribute if you want cats as our national animal"
+  );
+
+  const signPetiton = await Petition.voteForPetition("1");
 
   // checking if we created a petiton
 
