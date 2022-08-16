@@ -23,7 +23,7 @@ contract PetitionContract {
     Petition[] public petitions;
 
     // Mapping to track number of signers per Petition
-    mapping(uint256 => Petition) public idToPetition;
+    mapping(uint256 => Petition) idToPetition;
 
     mapping(address => signer) signers;
 
@@ -35,10 +35,15 @@ contract PetitionContract {
         string memory _petitionDescription
     ) public {
         petitionId++;
+        //petitions.push(idToPetition[petitionId])
         petitions.push(
-            Petition(_petitionName, _petitionDescription, 0, petitionId)
+            idToPetition[petitionId] = Petition(
+                _petitionName,
+                _petitionDescription,
+                0,
+                petitionId
+            )
         );
-        idToPetition[petitionId];
     }
 
     /*

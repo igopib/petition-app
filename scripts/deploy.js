@@ -16,6 +16,8 @@ async function main() {
     "Please contribute if you want dogs as our national animal"
   );
 
+  const signPetiton = await Petition.voteForPetition("0");
+
   // checking if we created a petiton
 
   let getPetition = await Petition.getPetition();
